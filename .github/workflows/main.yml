@@ -31,8 +31,8 @@ jobs:
       - name: Test backend
         run: cd server &&  npm run test
         env:
-          TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5433/postgres
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
       - name: Install dependencies frontend
         run: cd client && npm install
       - name: Check style
