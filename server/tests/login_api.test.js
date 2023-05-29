@@ -23,19 +23,6 @@ beforeEach(async () => {
     await User.create(initialUser[0])
 })
 
-test('non-existing user can not log in', async () => {
-    const nonexistingUser = {
-        username: 'Jaakko35',
-        password: 'salainen2'
-    }
-
-    await api
-        .post('/api/login')
-        .send(nonexistingUser)
-        .expect(401)
-})
-
-
 test('existing user can log in', async () => {
     const existingUser = {
         username: 'Pekka35',
@@ -48,3 +35,15 @@ test('existing user can log in', async () => {
         .expect(200)
 })
 
+
+test('non-existing user can not log in', async () => {
+    const nonexistingUser = {
+        username: 'Jaakko35',
+        password: 'salainen2'
+    }
+
+    await api
+        .post('/api/login')
+        .send(nonexistingUser)
+        .expect(401)
+})
