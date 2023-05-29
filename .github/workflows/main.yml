@@ -14,9 +14,9 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_USER: test
-          POSTGRES_PASSWORD: test
-          POSTGRES_DB: test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432/tcp
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -31,8 +31,9 @@ jobs:
       - name: Test backend
         run: cd server &&  npm run test
         env:
-          POSTGRES_HOST: postgres
-          POSTGRES_PORT: 5432
+          TEST_DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports['5432'] }}/postgres
+          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports['5432'] }}/postgres
+      - run: pg_isready -h localhost -p ${{ job.services.postgres.ports[5432] }}
       - name: Install dependencies frontend
         run: cd client && npm install
       - name: Check style
