@@ -33,6 +33,9 @@ test('existing user can log in', async () => {
         .post('/api/login')
         .send(existingUser)
         .expect(200)
+
+        const users = await User.findAll()
+        expect(users.length).toBe(1)
 })
 
 
