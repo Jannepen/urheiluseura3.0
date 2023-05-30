@@ -43,7 +43,7 @@ registerRouter.post('/', async (request, response) => {
             email: email
         })
 
-        const savedUser = await User.create(user)
+        const savedUser = await User.create(user.dataValues)
 
         return response.status(200).json(savedUser)
     } catch (error) {
