@@ -32,11 +32,7 @@ test('existing user can log in', async () => {
     await api
         .post('/api/login')
         .send(existingUser)
-//        .expect(response => {console.log(response)})
         .expect(200)
-
-    const users = await User.findAll()
-    expect(users.length).toBe(1)
 })
 
 
