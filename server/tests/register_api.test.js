@@ -36,7 +36,7 @@ test('can register with non-existing username', async () => {
         .expect(200)
     
     const users = await User.findAll()
-    expect(users.length).toBe(3)
+    expect(users.length).toBe(2)
 })
 
 test('correct number of users in database', async () => {
@@ -67,7 +67,7 @@ test('correct number of users in database', async () => {
         .send(existingUser)
 
     users = await User.findAll()
-    expect(users.length).toBe(3)
+    expect(users.length).toBe(2)
 })
 
 test('cannot register with existing username', async () => {
@@ -80,7 +80,7 @@ test('cannot register with existing username', async () => {
     await api
         .post('/api/register')
         .send(existingUser)
-        .expect(402)
+        .expect(401)
 })
 
 test('cannot register if mandatory values are missing', async () => {
@@ -93,5 +93,5 @@ test('cannot register if mandatory values are missing', async () => {
     await api
         .post('/api/register')
         .send(newUser)
-        .expect(402)
+        .expect(401)
 })

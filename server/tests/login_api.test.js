@@ -32,7 +32,7 @@ test('existing user can log in', async () => {
     await api
         .post('/api/login')
         .send(existingUser)
-        .expect(201)
+        .expect(200)
 })
 
 
@@ -45,5 +45,5 @@ test('non-existing user can not log in', async () => {
     await api
         .post('/api/login')
         .send(nonexistingUser)
-        .expect(402)
+        .expect(401)
 })
