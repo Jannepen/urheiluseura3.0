@@ -26,14 +26,24 @@ jobs:
         with: 
           node-version: '20'
       - name: Install dependencies backend
-        run: cd server && npm install
+        run: |
+          cd server
+          npm install
       - name: Test backend
-        run: cd server &&  npm run test
-        shell: bash
+        run: |
+          cd server
+          npm run test
         env:
           TEST_DATABASE_URL: postgres://test:test@localhost:${{ job.services.postgres.ports['5432'] }}/test
           DATABASE_URL: postgres://test:test@localhost:${{ job.services.postgres.ports['5432'] }}/test
       - name: Install dependencies frontend
-        run: cd client && npm install
+        run: |
+          cd client
+          npm install
       - name: Check style
-        run: cd server && npm run eslint && cd .. && cd client && npm run eslint
+        run: |
+          cd server
+          npm run eslint
+          cd ..
+          cd client
+          npm run eslint
