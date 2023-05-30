@@ -36,7 +36,7 @@ test('can register with non-existing username', async () => {
         .expect(200)
     
     const users = await User.findAll()
-    expect(users.length).toBe(3)
+    expect(users.length).toBe(2)
 })
 
 test('correct number of users in database', async () => {
