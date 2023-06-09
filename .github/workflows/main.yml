@@ -30,8 +30,9 @@ jobs:
           cd server
           npm install
       - name: Test backend
-        working-directory: ./server
-        run: npm run test
+        run: |
+          cd server
+          npm run test
         env:
           TEST_DATABASE_URL: postgres://test:test@localhost:${{ job.services.postgres.ports['5432'] }}/test
           DATABASE_URL: postgres://test:test@localhost:${{ job.services.postgres.ports['5432'] }}/test
